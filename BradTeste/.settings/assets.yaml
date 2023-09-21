@@ -1,0 +1,141 @@
+name: BradTeste
+version: 2
+projectReferences: 
+resources: 
+  - name: .classpath
+    type: com.ibm.rational.test.lt.classpath
+    dependencies: 
+      - path: /BradTeste/src
+        type: javaClasspath
+  - name: 'JMeter Tests'
+    resources: 
+      - name: buyer.jmx
+        type: com.ibm.rational.test.jmeter
+      - name: buyer.testsuite
+        type: com.ibm.rational.test.lt.schedule
+        version: 10.2.3.0
+        properties: 
+          description: 'Stages:
+
+	users=1; duration=Run Until Finished
+
+User Group 2: Group Size 10.0 users
+
+'
+          name: buyer
+          type: com.ibm.rational.test.common.schedule.Schedule
+          uid: A1ED345BF9138DF0F642B26138616230
+        dependencies: 
+          - path: '/BradTeste/JMeter Tests/buyer_ThreadGroup_ThreadGroup.jmx'
+            type: scheduleInvokedTest
+      - name: buyer_ThreadGroup.jmx
+        type: com.ibm.rational.test.jmeter
+      - name: buyer_ThreadGroup_ThreadGroup.jmx
+        type: com.ibm.rational.test.jmeter
+      - name: campeones.csv
+        type: com.ibm.rational.test.lt.datapool
+        dependencies: 
+          - path: '/BradTeste/JMeter Tests/campeones.csv.metadata'
+            type: datasetMetadata
+      - name: campeones.csv.metadata
+      - name: credentials.csv
+        type: com.ibm.rational.test.lt.datapool
+        dependencies: 
+          - path: '/BradTeste/JMeter Tests/credentials.csv.metadata'
+            type: datasetMetadata
+      - name: credentials.csv.metadata
+      - name: padrao-robo.jmx
+        type: com.ibm.rational.test.jmeter
+      - name: padrao-robo2.jmx
+        type: com.ibm.rational.test.jmeter
+      - name: 'padrao-robo2_Smoke - Thread Group.jmx'
+        type: com.ibm.rational.test.jmeter
+  - name: Schedules
+    resources: 
+      - name: sched1.testsuite
+        type: com.ibm.rational.test.lt.schedule
+        version: 10.2.3.0
+        properties: 
+          description: 'Stages:
+
+	users=10; duration=1 minutes
+
+User Group 1: Group Size 100.0 percent
+
+	Agent(s): virtualserver03.Fabio-de-Souza-Santos-s-Account.cloud
+
+	Test(s): search
+
+'
+          name: sched1
+          type: com.ibm.rational.test.common.schedule.Schedule
+          uid: A1ED32D3E6FE7F00FC3BE23336396266
+        dependencies: 
+          - path: /BradTeste/Tests/search.testsuite
+            type: scheduleInvokedTest
+          - path: /BradTeste/virtualserver03.Fabio-de-Souza-Santos-s-Account.cloud.location
+            type: scheduleLocation
+      - name: sched2.testsuite
+        type: com.ibm.rational.test.lt.schedule
+        version: 10.2.3.0
+        properties: 
+          description: 'Stages:
+
+	users=15; duration=Run Until Finished
+
+User Group 3: Group Size 15.0 users
+
+	Agent(s): virtualserver03.Fabio-de-Souza-Santos-s-Account.cloud
+
+'
+          name: sched2
+          type: com.ibm.rational.test.common.schedule.Schedule
+          uid: A1ED345CC5F02A40F642B26138616230
+        dependencies: 
+          - path: '/BradTeste/JMeter Tests/padrao-robo2_Smoke - Thread Group.jmx'
+            type: scheduleInvokedTest
+          - path: /BradTeste/virtualserver03.Fabio-de-Souza-Santos-s-Account.cloud.location
+            type: scheduleLocation
+      - name: schedlocal.testsuite
+        type: com.ibm.rational.test.lt.schedule
+        version: 10.2.3.0
+        properties: 
+          description: 'Stages:
+
+	users=10; duration=1 minutes
+
+User Group 1: Group Size 100.0 percent
+
+	Test(s): search
+
+'
+          name: schedlocal
+          type: com.ibm.rational.test.common.schedule.Schedule
+          uid: A1ED3525B90073A7FD5AE33938653839
+        dependencies: 
+          - path: /BradTeste/Tests/search.testsuite
+            type: scheduleInvokedTest
+      - name: workbench-52.117.236.246.location
+        type: com.ibm.rational.test.lt.location
+  - name: Tests
+    resources: 
+      - name: search.recdata
+      - name: search.recsession
+        type: com.ibm.rational.test.lt.recsession
+        dependencies: 
+          - path: /BradTeste/Tests/search.recdata
+            type: recsessionRecdata
+      - name: search.testsuite
+        type: com.ibm.rational.test.lt.test
+        version: 10.2.3.0
+        properties: 
+          features: 'com.ibm.rational.test.lt.feature.lt,com.ibm.rational.test.lt.feature.http'
+          type: com.ibm.rational.test.lt.lttest
+          uid: A1ED32D38D5E2900FC3BE23336396266
+        dependencies: 
+          - path: /BradTeste/Tests/search.recsession
+            type: testRecsession
+  - name: src
+    resources: 
+  - name: virtualserver03.Fabio-de-Souza-Santos-s-Account.cloud.location
+    type: com.ibm.rational.test.lt.location

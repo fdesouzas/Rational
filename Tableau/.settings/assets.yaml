@@ -1,0 +1,33 @@
+name: Tableau
+version: 2
+projectReferences: 
+resources: 
+  - name: .classpath
+    type: com.ibm.rational.test.lt.classpath
+    dependencies: 
+      - path: /Tableau/src
+        type: javaClasspath
+  - name: Tests
+    resources: 
+      - name: teste1.recdata
+      - name: teste1.recsession
+        type: com.ibm.rational.test.lt.recsession
+        dependencies: 
+          - path: /Tableau/Tests/teste1.recdata
+            type: recsessionRecdata
+      - name: teste1.testsuite
+        type: com.ibm.rational.test.lt.test
+        version: 10.2.3.0
+        properties: 
+          features: 'com.ibm.rational.test.lt.feature.lt,com.ibm.rational.test.lt.feature.mobileweb'
+          type: com.ibm.rational.test.lt.lttest
+          uid: A1ED3370EEEB86C0FC3BE23336396266
+        dependencies: 
+          - path: /Tableau/Tests/teste1.recsession
+            type: testRecsession
+          - path: /Tableau/tableau_com_70c.ma
+            type: test#moeb.applicationPackage
+  - name: src
+    resources: 
+  - name: tableau_com_70c.ma
+    type: moeb.applicationPackage
