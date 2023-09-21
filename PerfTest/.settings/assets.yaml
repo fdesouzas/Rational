@@ -42,8 +42,54 @@ resources:
       - name: t3_1695272928120_perf!localhost.rstats
         type: com.ibm.rational.test.lt.stats.raw
       - name: t3_1695272930392.executiondlr
+      - name: t3_1695326504290.stats
+        type: com.ibm.rational.test.lt.stats.session
+        properties: 
+          startTime: 1695326504290
+          tags: 
+          testId: A1EE583C8D2B6EE0D866B13165313730
+          testName: t3
+        dependencies: 
+          - path: /PerfTest/Results/t3_1695326504290_orch!system.mstats
+            type: statsSessionStore
+          - path: /PerfTest/Results/t3_1695326504290_orch!system.rstats
+            type: statsSessionStore
+          - path: /PerfTest/Results/t3_1695326504290_perf!localhost.mstats
+            type: statsSessionStore
+          - path: /PerfTest/Results/t3_1695326504290_perf!localhost.rstats
+            type: statsSessionStore
+          - path: /PerfTest/Results/t3_1695326506099.executiondlr
+            type: statsSessionAsset
+          - path: /PerfTest/t3.testsuite
+            type: statsSessionTest
+      - name: t3_1695326504290_orch!system.mstats
+      - name: t3_1695326504290_orch!system.rstats
+        type: com.ibm.rational.test.lt.stats.raw
+      - name: t3_1695326504290_perf!localhost.mstats
+      - name: t3_1695326504290_perf!localhost.rstats
+        type: com.ibm.rational.test.lt.stats.raw
+      - name: t3_1695326506099.executiondlr
   - name: Schedules
     resources: 
+      - name: basic.testsuite
+        type: com.ibm.rational.test.lt.schedule
+        version: 10.5.3.0
+        properties: 
+          description: 'Stages:
+
+	users=5; duration=Run Until Finished
+
+User Group 1: Group Size 100.0 percent
+
+	Test(s): t3
+
+'
+          name: basic
+          type: com.ibm.rational.test.common.schedule.Schedule
+          uid: A1EE58BB551CE630C834B96430356435
+        dependencies: 
+          - path: /PerfTest/t3.testsuite
+            type: scheduleInvokedTest
   - name: Tests
     resources: 
       - name: t2.recdata
